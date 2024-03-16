@@ -1,7 +1,13 @@
 import React from "react";
 import css from "./Options.module.css";
 
-const Options = ({ onClickGood, onClickNeutral, onClickBad, onClickReset }) => {
+const Options = ({
+  onClickGood,
+  onClickNeutral,
+  onClickBad,
+  hasFeedback,
+  onClickReset,
+}) => {
   return (
     <div className={css.btnContainer}>
       <button className={css.btnOption} type="button" onClick={onClickGood}>
@@ -13,9 +19,11 @@ const Options = ({ onClickGood, onClickNeutral, onClickBad, onClickReset }) => {
       <button className={css.btnOption} type="button" onClick={onClickBad}>
         Bad
       </button>
-      <button className={css.btnOption} type="button" onClick={onClickReset}>
-        Reset
-      </button>
+      {hasFeedback && (
+        <button className={css.btnOption} type="button" onClick={onClickReset}>
+          Reset
+        </button>
+      )}
     </div>
   );
 };

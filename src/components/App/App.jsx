@@ -3,8 +3,10 @@ import { useState, useEffect } from "react";
 import Description from "../Description/Description";
 import Options from "../Options/Options";
 import Feedback from "../Feedback/Feedback";
+import Notification from "../Notification/Notification";
 
 const App = () => {
+  const [visible, setVisible] = useState(false);
   const [clicks, setClicks] = useState(() => {
     const savedClicks = JSON.parse(localStorage.getItem("saved-clicks"));
     return savedClicks ? savedClicks : { good: 0, neutral: 0, bad: 0 };
@@ -42,6 +44,7 @@ const App = () => {
         onClickNeutral={updateClickNeutral}
         onClickBad={updateClickBad}
         onClickReset={handleReset}
+        hasFeedback={totalClicks > 0}
       />
       {totalClicks > 0 ? (
         <Feedback
@@ -52,7 +55,7 @@ const App = () => {
           statePositive={positiveFeedback}
         />
       ) : (
-        <p>No feedback yet</p>
+        <Notification />
       )}
     </>
   );
